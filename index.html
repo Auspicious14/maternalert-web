@@ -279,11 +279,13 @@
   }
 </style>
 </head>
+
+
 <body>
 
 <nav>
   <div class="nav-logo">Matern<span>Alert</span></div>
-  <a href="#download" class="nav-cta">↓ Download APK</a>
+  <a href="https://github.com/Auspicious14/maternalert-fe/releases/download/v1.0.0/application-39effc47-8c4a-450e-87d7-eab45ef134f7.apk" class="nav-cta">↓ Download APK</a>
 </nav>
 
 <section class="hero">
@@ -385,8 +387,8 @@
   <h2 class="section-title">Download MaternAlert<br/>Free. Right now.</h2>
   <p>Available on Android. Install directly — no app store needed. We're committed to keeping this free for every mother who needs it.</p>
   <div class="download-btns">
-    <a href="#" class="dl-btn">⬇ Download APK (Android)</a>
-    <a href="#" class="dl-btn ghost">📲 Share with a friend</a>
+    <a href="https://github.com/Auspicious14/maternalert-fe/releases/download/v1.0.0/application-39effc47-8c4a-450e-87d7-eab45ef134f7.apk" class="dl-btn">⬇ Download APK (Android)</a>
+    <a href="#" class="dl-btn ghost" onclick="handleShare(event)">📲 Share with a friend</a>
   </div>
   <p class="install-note">Enable "Install from unknown sources" in your Android settings · Safe &amp; verified</p>
 </section>
@@ -396,5 +398,22 @@
   <p style="margin-top:0.5rem;"><a href="#">TikTok</a> · <a href="#">Contact</a> · <a href="#">Privacy</a></p>
 </footer>
 
+
+<script>
+  function handleShare(e) {
+    e.preventDefault();
+    if (navigator.share) {
+      navigator.share({
+        title: 'MaternAlert',
+        text: 'Free app that tracks blood pressure during pregnancy and detects pre-eclampsia early. Could save a life 🤰',
+        url: window.location.href
+      });
+    } else {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert('Link copied! Share it with someone who needs it.');
+      });
+    }
+  }
+</script>
 </body>
 </html>
