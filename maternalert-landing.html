@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MaternAlert — Know the Signs. Act in Time.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --rose: #C8385A;
+    --rose-light: #F7D6DE;
+    --rose-dark: #8B1A33;
+    --cream: #FDF6F0;
+    --deep: #1A0A0E;
+    --mid: #5C3344;
+    --accent: #E8A0B0;
+    --white: #FFFFFF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--deep);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 6%;
+    background: rgba(253,246,240,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,56,90,0.12);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 900;
+    color: var(--rose);
+    letter-spacing: -0.5px;
+  }
+  .nav-logo span { color: var(--deep); }
+  .nav-cta {
+    background: var(--rose); color: var(--white);
+    padding: 0.6rem 1.4rem; border-radius: 50px;
+    text-decoration: none; font-weight: 500; font-size: 0.9rem;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { background: var(--rose-dark); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 6% 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -20%; right: -10%;
+    width: 70vw; height: 70vw; border-radius: 50%;
+    background: radial-gradient(circle, var(--rose-light) 0%, transparent 70%);
+    opacity: 0.5; pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--rose-light); color: var(--rose);
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem; border-radius: 50px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.6rem, 5vw, 4rem);
+    font-weight: 900; line-height: 1.1;
+    color: var(--deep);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero h1 em { color: var(--rose); font-style: normal; }
+  .hero p {
+    font-size: 1.1rem; line-height: 1.8; color: var(--mid);
+    max-width: 520px; margin-bottom: 2.5rem;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-buttons {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--rose); color: var(--white);
+    padding: 0.9rem 2rem; border-radius: 50px;
+    text-decoration: none; font-weight: 500; font-size: 1rem;
+    display: flex; align-items: center; gap: 0.5rem;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(200,56,90,0.3);
+  }
+  .btn-primary:hover { background: var(--rose-dark); transform: translateY(-2px); box-shadow: 0 6px 28px rgba(200,56,90,0.4); }
+  .btn-secondary {
+    background: transparent; color: var(--rose);
+    padding: 0.9rem 2rem; border-radius: 50px;
+    text-decoration: none; font-weight: 500; font-size: 1rem;
+    border: 2px solid var(--rose);
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { background: var(--rose); color: white; }
+
+  .hero-visual {
+    display: flex; justify-content: center; align-items: center;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .phone-mockup {
+    width: 260px; height: 520px;
+    background: var(--deep);
+    border-radius: 40px;
+    position: relative;
+    box-shadow: 0 30px 80px rgba(26,10,14,0.3), 0 0 0 8px rgba(200,56,90,0.15);
+    overflow: hidden;
+    transform: rotate(3deg);
+  }
+  .phone-screen {
+    position: absolute; inset: 12px;
+    background: linear-gradient(160deg, #1A0A0E 0%, #3D1525 100%);
+    border-radius: 30px;
+    display: flex; flex-direction: column;
+    align-items: center; padding: 1.5rem 1rem; gap: 0.8rem;
+    overflow: hidden;
+  }
+  .phone-notch {
+    width: 80px; height: 18px;
+    background: var(--deep); border-radius: 0 0 12px 12px;
+    align-self: center; margin-bottom: 0.5rem;
+  }
+  .phone-logo-text {
+    font-family: 'Playfair Display', serif;
+    color: var(--rose); font-size: 1.1rem; font-weight: 900;
+  }
+  .bp-card {
+    width: 100%; background: rgba(200,56,90,0.15);
+    border: 1px solid rgba(200,56,90,0.3);
+    border-radius: 16px; padding: 1rem;
+    text-align: center;
+  }
+  .bp-label { color: var(--accent); font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase; }
+  .bp-value { color: white; font-size: 1.8rem; font-weight: 700; font-family: 'Playfair Display', serif; }
+  .bp-sub { color: var(--accent); font-size: 0.7rem; }
+  .alert-card {
+    width: 100%; background: rgba(200,56,90,0.9);
+    border-radius: 14px; padding: 0.8rem 1rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .alert-icon { font-size: 1.2rem; }
+  .alert-text { color: white; font-size: 0.7rem; line-height: 1.4; }
+  .alert-text strong { font-size: 0.75rem; }
+  .week-badge {
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px; padding: 0.6rem 1rem;
+    width: 100%; text-align: center;
+    color: var(--accent); font-size: 0.7rem;
+  }
+  .week-badge strong { color: white; font-size: 1rem; display: block; }
+  .symptom-row {
+    display: flex; gap: 0.4rem; width: 100%; flex-wrap: wrap;
+    justify-content: center;
+  }
+  .symptom-pill {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--accent); font-size: 0.6rem;
+    padding: 0.3rem 0.6rem; border-radius: 50px;
+  }
+  .pulse-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 0 0 rgba(74,222,128,0.4);
+    animation: pulse 2s infinite;
+    display: inline-block; margin-right: 4px;
+  }
+
+  /* ── STAT BAR ── */
+  .stat-bar {
+    background: var(--rose);
+    padding: 2rem 6%;
+    display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center;
+  }
+  .stat-item { text-align: center; color: white; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 900; display: block;
+  }
+  .stat-label { font-size: 0.85rem; opacity: 0.85; }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 5rem 6%; }
+  .section-tag {
+    display: inline-block;
+    background: var(--rose-light); color: var(--rose);
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.35rem 0.9rem; border-radius: 50px;
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 900;
+    line-height: 1.15; margin-bottom: 1rem;
+  }
+  .section-sub { color: var(--mid); font-size: 1.05rem; line-height: 1.75; max-width: 600px; }
+
+  /* ── FEATURES ── */
+  .features-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .feature-card {
+    background: white; border-radius: 20px;
+    padding: 2rem; border: 1px solid rgba(200,56,90,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .feature-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--rose);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(200,56,90,0.12); }
+  .feature-card:hover::before { transform: scaleX(1); }
+  .feature-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+  .feature-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.6rem; }
+  .feature-desc { color: var(--mid); font-size: 0.9rem; line-height: 1.7; }
+
+  /* ── HOW IT WORKS ── */
+  .how-section { background: var(--deep); color: white; }
+  .how-section .section-title { color: white; }
+  .how-section .section-sub { color: rgba(255,255,255,0.6); }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-top: 3rem; }
+  .step { position: relative; padding-left: 1rem; }
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem; font-weight: 900;
+    color: rgba(200,56,90,0.25); line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .step-title { color: white; font-size: 1.1rem; font-weight: 500; margin-bottom: 0.5rem; }
+  .step-desc { color: rgba(255,255,255,0.55); font-size: 0.9rem; line-height: 1.7; }
+
+  /* ── BUILT BY ── */
+  .built-section {
+    background: var(--rose-light);
+    text-align: center; padding: 4rem 6%;
+  }
+  .nurse-quote {
+    max-width: 640px; margin: 0 auto;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; line-height: 1.6; color: var(--deep);
+    font-style: italic;
+  }
+  .nurse-credit {
+    margin-top: 1.5rem; color: var(--rose); font-weight: 500;
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  }
+
+  /* ── DOWNLOAD ── */
+  .download-section {
+    background: linear-gradient(135deg, var(--rose-dark) 0%, var(--rose) 100%);
+    color: white; text-align: center; padding: 5rem 6%;
+  }
+  .download-section .section-title { color: white; }
+  .download-section p { color: rgba(255,255,255,0.85); margin: 1rem auto 2.5rem; max-width: 480px; font-size: 1.05rem; line-height: 1.7; }
+  .download-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .dl-btn {
+    background: white; color: var(--rose);
+    padding: 0.9rem 2rem; border-radius: 50px;
+    text-decoration: none; font-weight: 600; font-size: 0.95rem;
+    display: flex; align-items: center; gap: 0.6rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  }
+  .dl-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.25); }
+  .dl-btn.ghost {
+    background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5);
+  }
+  .dl-btn.ghost:hover { background: rgba(255,255,255,0.1); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--deep); color: rgba(255,255,255,0.45);
+    text-align: center; padding: 2rem 6%;
+    font-size: 0.85rem;
+  }
+  footer a { color: var(--rose); text-decoration: none; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(74,222,128,0.4); }
+    70% { box-shadow: 0 0 0 8px rgba(74,222,128,0); }
+    100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; text-align: center; padding-top: 7rem; }
+    .hero-visual { display: none; }
+    .hero p { margin: 0 auto 2rem; }
+    .hero-buttons { justify-content: center; }
+    .stat-bar { gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Matern<span>Alert</span></div>
+  <a href="#download" class="nav-cta">↓ Download APK</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-tag">🤰 Maternal Health Technology</span>
+    <h1>Know the Signs.<br/><em>Act in Time.</em><br/>Every Pregnancy.</h1>
+    <p>Pre-eclampsia is one of the leading causes of maternal death in Nigeria and beyond — yet it's preventable with early detection. MaternAlert tracks your blood pressure, symptoms, and pregnancy journey so no warning sign goes unnoticed.</p>
+    <div class="hero-buttons">
+      <a href="#download" class="btn-primary">⬇ Download Free APK</a>
+      <a href="#features" class="btn-secondary">See Features</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="phone-mockup">
+      <div class="phone-screen">
+        <div class="phone-notch"></div>
+        <div class="phone-logo-text">MaternAlert</div>
+        <div class="bp-card">
+          <div class="bp-label"><span class="pulse-dot"></span>Blood Pressure</div>
+          <div class="bp-value">138/91</div>
+          <div class="bp-sub">⚠ Mildly Elevated — Monitor Closely</div>
+        </div>
+        <div class="alert-card">
+          <div class="alert-icon">🚨</div>
+          <div class="alert-text"><strong>Elevated BP Detected</strong><br/>Contact your clinic or emergency contact now.</div>
+        </div>
+        <div class="week-badge">
+          <strong>Week 32</strong>
+          Pregnancy Progress
+        </div>
+        <div class="symptom-row">
+          <span class="symptom-pill">Headache</span>
+          <span class="symptom-pill">Swelling</span>
+          <span class="symptom-pill">Blurred Vision</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAT BAR -->
+<div class="stat-bar">
+  <div class="stat-item">
+    <span class="stat-num">76,000+</span>
+    <span class="stat-label">Maternal deaths yearly from pre-eclampsia</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">60%</span>
+    <span class="stat-label">Of cases occur in developing countries</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">Free</span>
+    <span class="stat-label">MaternAlert — always free to download</span>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <span class="section-tag">What it does</span>
+  <h2 class="section-title">Everything a pregnant woman<br/>needs, in one place</h2>
+  <p class="section-sub">Designed with nurses and mothers in mind — MaternAlert is not just an app, it's a companion through every week of your journey.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">🩺</span>
+      <div class="feature-title">Blood Pressure Tracker</div>
+      <p class="feature-desc">Log your readings regularly. MaternAlert detects patterns and alerts you the moment your BP reaches concerning levels.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🚨</span>
+      <div class="feature-title">Emergency Screens</div>
+      <p class="feature-desc">When danger signs are detected, a full-screen emergency alert activates with one-tap calling to your emergency contacts.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">📍</span>
+      <div class="feature-title">Nearby Clinic Finder</div>
+      <p class="feature-desc">Instantly shows hospitals and clinics near you using your location — even in the middle of the night when seconds matter.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">📅</span>
+      <div class="feature-title">Auto Pregnancy Calendar</div>
+      <p class="feature-desc">Your pregnancy week updates automatically every day from your due date. No manual tracking needed.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">👤</span>
+      <div class="feature-title">Smart Risk Profiling</div>
+      <p class="feature-desc">Set up your profile with hereditary history, number of previous pregnancies, and more — so the app understands your personal risk level.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">📚</span>
+      <div class="feature-title">Education Hub</div>
+      <p class="feature-desc">Learn what pre-eclampsia is, its warning signs, and how to stay safe — written in clear, accessible language.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <span class="section-tag" style="background:rgba(200,56,90,0.2); color:var(--accent)">How it works</span>
+  <h2 class="section-title">Simple to use.<br/>Powerful when it counts.</h2>
+  <p class="section-sub">Getting started takes under 5 minutes. After that, MaternAlert works quietly in the background — until it really needs to speak up.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Set up your profile</div>
+      <p class="step-desc">Enter your pregnancy week, family health history, and add your emergency contacts and clinic address.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">Log BP & symptoms daily</div>
+      <p class="step-desc">Quick daily check-ins: blood pressure reading + any symptoms like swelling, headaches, or blurred vision.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Get alerted instantly</div>
+      <p class="step-desc">If something looks wrong, MaternAlert surfaces an emergency screen immediately with guidance and one-tap call access.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-title">Reach help fast</div>
+      <p class="step-desc">Call your emergency contact, find the nearest clinic, or dial emergency services — all from one screen.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BUILT BY NURSE -->
+<section class="built-section">
+  <span class="section-tag">Built by a nurse</span>
+  <p class="nurse-quote">"I've seen too many women lose their lives or their babies because the warning signs of pre-eclampsia were missed. I knew there had to be a better way — and that's why MaternAlert exists."</p>
+  <div class="nurse-credit">
+    <span>💉</span>
+    <span>Co-founded with a registered nurse — built from the ward, not the boardroom.</span>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section class="download-section" id="download">
+  <h2 class="section-title">Download MaternAlert<br/>Free, right now.</h2>
+  <p>Available on Android. Install directly — no app store needed. We're committed to keeping this app free for every mother who needs it.</p>
+  <div class="download-btns">
+    <a href="#" class="dl-btn">⬇ Download APK (Android)</a>
+    <a href="#" class="dl-btn ghost">📲 Share with a friend</a>
+  </div>
+  <p style="margin-top:1.5rem; font-size:0.8rem; opacity:0.65;">Enable "Install from unknown sources" in your Android settings to install. Safe & verified.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 MaternAlert · Built to protect mothers and babies · <a href="#">Privacy</a> · <a href="#">Contact</a></p>
+  <p style="margin-top:0.5rem;">Questions? Reach us on <a href="#">TikTok</a> or by <a href="#">email</a>.</p>
+</footer>
+
+</body>
+</html>
